@@ -1,0 +1,20 @@
+---
+- name: Collection examples
+  hosts: nodes
+  gather_facts: false
+  remote_user: root
+
+  tasks:
+    - name: Install apache
+      apt:
+        state: present
+        pkg:
+          - apache2
+
+    - name: Enable ssl and md module
+      community.general.apache2_module:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - ssl
+        - md
